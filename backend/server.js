@@ -8,7 +8,6 @@ const skillRoutes = require("./routes/skillRoutes");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware - allow React frontend to call this API
 app.use(cors());
 
 app.use(express.json());
