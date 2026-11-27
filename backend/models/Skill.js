@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Skill Schema - stores each member's skill listing
 const skillSchema = new mongoose.Schema({
   userName: {
     type: String,
@@ -24,7 +23,6 @@ const skillSchema = new mongoose.Schema({
   }
 });
 
-// Create and export the Skill model
 const Skill = mongoose.model("Skill", skillSchema);
 
 module.exports = Skill;
