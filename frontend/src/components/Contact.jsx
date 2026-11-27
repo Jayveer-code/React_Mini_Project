@@ -1,31 +1,26 @@
 import { useState } from "react";
 
 function Contact() {
-  // Form data state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: ""
   });
 
-  // Error messages for each field
   const [errors, setErrors] = useState({
     name: "",
     email: "",
     message: ""
   });
 
-  // Success message after valid submission
   const [successMsg, setSuccessMsg] = useState("");
 
-  // Update form fields when user types
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
 
-    // Clear error for the field being typed
     setErrors({
       ...errors,
       [e.target.name]: ""
@@ -34,13 +29,11 @@ function Contact() {
     setSuccessMsg("");
   };
 
-  // Simple email format check
   const isValidEmail = (email) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return pattern.test(email);
   };
 
-  // Validate and submit form (no MongoDB / no email sending)
   const handleSubmit = (e) => {
     e.preventDefault();
 

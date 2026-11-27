@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 
-// Backend API URL (local Express server)
 const API_URL = "http://localhost:5000/api/skills";
 
 function Skills() {
-  // All skills from MongoDB
   const [skills, setSkills] = useState([]);
 
-  // Form data for add / update
   const [formData, setFormData] = useState({
     userName: "",
     skillName: "",
@@ -16,17 +13,13 @@ function Skills() {
     skillType: "I Can Teach"
   });
 
-  // If editId has a value, form is in update mode
   const [editId, setEditId] = useState(null);
 
-  // Search and filter
   const [searchText, setSearchText] = useState("");
   const [filterType, setFilterType] = useState("All");
 
-  // Success / info message
   const [message, setMessage] = useState("");
 
-  // GET - Fetch all skills when page loads
   const fetchSkills = async () => {
     try {
       const response = await fetch(API_URL);
@@ -42,7 +35,6 @@ function Skills() {
     fetchSkills();
   }, []);
 
-  // Handle input / select changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -50,7 +42,6 @@ function Skills() {
     });
   };
 
-  // POST or PUT - Add new skill or update existing skill
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,7 +49,6 @@ function Skills() {
       let response;
 
       if (editId) {
-        // UPDATE
         response = await fetch(`${API_URL}/${editId}`, {
           method: "PUT",
           headers: {
@@ -67,7 +57,6 @@ function Skills() {
           body: JSON.stringify(formData)
         });
       } else {
-        // CREATE
         response = await fetch(API_URL, {
           method: "POST",
           headers: {
@@ -90,7 +79,6 @@ function Skills() {
         setMessage("Skill added successfully");
       }
 
-      // Clear form and exit edit mode
       setFormData({
         userName: "",
         skillName: "",
@@ -100,15 +88,12 @@ function Skills() {
       });
       setEditId(null);
 
-      // Refresh list
       fetchSkills();
     } catch (error) {
       console.log("Error:", error);
       setMessage("Error connecting to server");
     }
   };
-
-  // Fill form with selected skill for editing
   const handleEdit = (skill) => {
     setEditId(skill._id);
     setFormData({
@@ -121,7 +106,6 @@ function Skills() {
     setMessage("");
   };
 
-  // DELETE - Remove a skill listing
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this skill?"
@@ -151,7 +135,6 @@ function Skills() {
     }
   };
 
-  // Cancel update and clear form
   const handleCancel = () => {
     setEditId(null);
     setFormData({
@@ -164,7 +147,6 @@ function Skills() {
     setMessage("");
   };
 
-  // Filter skills by search text and skill type
   const filteredSkills = skills.filter((skill) => {
     const matchesSearch = skill.skillName
       .toLowerCase()
@@ -185,7 +167,6 @@ function Skills() {
 
       {message && <p className="status-message">{message}</p>}
 
-      {/* Skill Form */}
       <div className="form-container">
         <h2>{editId ? "Update Skill" : "Add a Skill"}</h2>
 
@@ -297,7 +278,6 @@ function Skills() {
         </select>
       </div>
 
-      {/* Skill Cards */}
       <div className="skills-grid">
         {filteredSkills.length === 0 ? (
           <p className="empty-text">No skills found. Add a skill to get started.</p>

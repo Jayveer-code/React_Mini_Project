@@ -1,7 +1,6 @@
 function Home({ changePage }) {
   return (
     <div className="home-page">
-      {/* Hero Section */}
       <section className="hero">
         <p className="hero-label">Community Skill Exchange Portal</p>
         <h1 className="hero-brand">SkillSwap</h1>
@@ -20,7 +19,6 @@ function Home({ changePage }) {
         </div>
       </section>
 
-      {/* How it works */}
       <section className="how-section">
         <h2>How Skill Exchange Works</h2>
         <p className="section-intro">

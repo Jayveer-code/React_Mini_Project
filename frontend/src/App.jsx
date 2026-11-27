@@ -6,10 +6,8 @@ import Contact from "./components/Contact";
 import Skills from "./components/Skills";
 
 function App() {
-  // Simple page navigation using useState (no React Router needed)
   const [page, setPage] = useState("home");
 
-  // Change page when Navbar link or button is clicked
   const changePage = (pageName) => {
     setPage(pageName);
   };
